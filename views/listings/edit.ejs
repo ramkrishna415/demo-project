@@ -1,0 +1,86 @@
+<!-- <%layout("/layouts/boilerplate")%>
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+
+    <h2>Edit your Listing</h2>
+    <form method="POST" action="/listings/<%=listi._id%>?_method=PUT" >
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input name="listi[title]" value="<%=listi.title%>" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="listi[description]" class="form-control"><%=listi.description%></textarea>
+        </div>
+       <div class="mb-3">
+        <label for="image" class="form-label">Image</label>
+        <input name="listi[image][url]" value="<%=listi.image.url%>" type="text" class="form-control">
+       </div>
+
+       <div class="row">
+        <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input name="listi[price]" value="<%=listi.price%>" type="number" class="form-control">
+           </div>
+            <div class="mb-3 col-md-8">
+                <label for="country" class="form-label">Country</label>
+                <input name="listi[country]" value="<%=listi.country%>" type="text" class="form-control">
+            </div>
+       </div>
+       
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input name="listi[location]" value="<%=listi.location%>" type="location" type="text" class="form-control">
+        </div>
+       <button class="btn btn-dark edit-btn mt-3">Edit</button>
+    </form>
+</div>
+</div> -->
+
+
+
+
+ <%layout("/layouts/boilerplate")%>
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+
+    <h2>Edit your Listing</h2>
+<form method="POST" action="/listings/<%= listi._id %>?_method=PUT"
+    novalidate
+     class="needs-validation"
+    enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input name="listing[title]" value="<%= listi.title %>" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="listing[description]" class="form-control"><%= listi.description %></textarea>
+    </div>
+
+        <div class="mb-3">
+            original listing image<br/>
+           <img src="<%=originalImageUrl%>"/> 
+        </div>
+    <div class="mb-3">
+        <label for="image" class="form-label"> Upload New Image</label>
+        <input name="listing[image]" type="file" class="form-control" 
+        />
+
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input name="listing[price]" value="<%= listi.price %>" type="number" class="form-control">
+        </div>
+        <div class="mb-3 col-md-8">
+            <label for="country" class="form-label">Country</label>
+            <input name="listing[country]" value="<%= listi.country %>" type="text" class="form-control">
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input name="listing[location]" value="<%= listi.location %>" type="text" class="form-control">
+    </div>
+    <button class="btn btn-dark edit-btn mt-3">Edit</button>
+</form>
