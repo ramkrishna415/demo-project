@@ -1,3 +1,4 @@
+
 if(process.env.NODE_ENV != "production"){
     require('dotenv').config();
 }
@@ -27,7 +28,10 @@ const User =require("./models/user.js");
 
 
 
- const dbUrl = process.env.ATLASDB_URL;
+  const mon = process.env.ATLASDB_URL;
+//const mon= 'mongodb://127.0.0.1/mejor-project';     //mongo atlas under problam    u intrested then using  
+// db  all is working   change session  under replace dbUrl to mon  all probal in app.js file
+
 main().then(()=>{
     console.log("connection successful");
 })
@@ -35,8 +39,11 @@ main().then(()=>{
     console.log(err);
 });
 async function main() {
-    await mongoose.connect(dbUrl);
+    await mongoose.connect(mon);
 };
+
+
+
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
@@ -46,7 +53,7 @@ app.use(express.static(path.join(__dirname,"/public")));
 
 
 const store =MongoStore.create({
-    mongoUrl:dbUrl,
+    mongoUrl:mon,
     crypto:{
         secret:process.env.SECRET,
     },
@@ -57,7 +64,7 @@ store.on("error",()=>{
 });
 
 const sessionOptions={
-    store,
+     store,
     secret:process.env.SECRET,
     resave:false,
     saveUnintialized:true,
@@ -72,6 +79,10 @@ const sessionOptions={
 // app.get("/", (req,res)=>{
 //     res.send("i am Ramkrishna");
 // });
+
+app.get("/", (req,res)=>{
+    res.redirect("/listings");
+});
 
 
 
@@ -126,8 +137,7 @@ app.use((err, req, res, next)=>{
 
 app.listen(8080,()=>{
     console.log("server is listen to the port 8080");
+    
 });
-
-
 
 

@@ -2,6 +2,8 @@ const mongoose =require("mongoose");
 const initData = require("./data.js");
 const listing = require("../models/listen.js");
 
+require('dotenv').config();
+
 main().then(()=>{
     console.log("connection successful");
 })
@@ -10,13 +12,14 @@ main().then(()=>{
 });
 async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/mejor-project');
+  
+  //await mongoose.connect(process.env.ATLASDB_URL);
 }
-
 const  initDb =async() =>{
-    await listing.deleteMany({});
-     initData.data= initData.data.map((obj)=>({...obj
-        ,owner: new mongoose.Types.ObjectId("67d2acc0a137fdcec5681abb"),
-    }));
+    // await listing.deleteMany({});
+    //  initData.data= initData.data.map((obj)=>({...obj
+    //     ,owner: new mongoose.Types.ObjectId("67d2acc0a137fdcec5681abb"),
+    // }));
      await listing.insertMany(initData.data);
     console.log("data is inserting");
 };
